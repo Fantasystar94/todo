@@ -1,0 +1,33 @@
+.top {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: #000;
+  gap: 0 20px;
+}
+
+.top * {
+  line-height: 1em;
+}
+
+.top .logo {
+  width: 80px;
+  animation: App-logo-spin infinite 10s linear;
+}
+
+.top .title {
+  color: #fff;
+  font-weight: 700;
+  font-size: 32px;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}

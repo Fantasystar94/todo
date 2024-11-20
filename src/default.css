@@ -1,0 +1,79 @@
+/* 1. 모든 요소의 여백과 패딩을 제거 */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* 요소 크기를 계산할 때 패딩과 보더를 포함 */
+}
+
+/* 2. 기본 폰트 스타일 초기화 */
+body {
+    font-family: sans-serif; /* 기본 폰트를 지정 */
+    line-height: 1.5; /* 줄 간격을 1.5로 설정 */
+}
+
+/* 3. 링크 기본 스타일 제거 */
+a {
+    text-decoration: none; /* 밑줄 제거 */
+    color: inherit; /* 부모 요소의 색상 상속 */
+}
+
+/* 4. 이미지의 크기 조정 */
+img {
+    max-width: 100%; /* 이미지가 부모 요소를 넘지 않도록 제한 */
+    height: auto; /* 비율 유지 */
+}
+
+/* 5. 폼 요소 초기화 */
+button,
+input,
+select,
+textarea {
+    background: none; /* 기본 배경 제거 */
+    border: none; /* 기본 테두리 제거 */
+    font: inherit; /* 폰트 스타일 상속 */
+    outline: none; /* 포커스 시 테두리 제거 */
+}
+button{cursor: pointer;}
+/* 6. 리스트 스타일 초기화 */
+ul,
+ol {
+    list-style: none; /* 기본 리스트 스타일(점, 번호 등) 제거 */
+}
+
+/* 7. 테이블 기본 스타일 초기화 */
+table {
+    border-collapse: collapse; /* 테이블 셀 경계 간격 제거 */
+    border-spacing: 0; /* 셀 간격 제거 */
+}
+
+/* 8. 기본 블록 요소의 높이 및 너비 초기화 */
+blockquote,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+margin:0;
+}
+
+/* 9. 강제 요소 스타일 초기화 */
+hr {
+    border: none; /* 기본 border 제거 */
+    height: 1px; /* 기본 높이 설정 */
+    background-color: #ddd; /* 배경색 설정 */
+}
+
+/* 10. 기본 테두리 및 배경색 제거 */
+fieldset {
+    border: none; /* 기본 테두리 제거 */
+    padding: 0; /* 패딩 제거 */
+}
+
+* {
+    font-family: 'Gmarket Sans', sans-serif;
+  }
+  

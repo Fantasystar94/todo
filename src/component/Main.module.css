@@ -1,0 +1,61 @@
+.main {
+    width: 1400px;
+    margin: 0 auto;
+}
+.main *{text-align:left;}
+
+.main .mainBox {
+    width: inherit;
+    height: auto;
+}
+
+.main .mainBox .todoLists {
+    width: inherit;
+    padding:20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap:10px;
+    height:800px;
+    overflow:scroll;
+    border-radius:8px;
+    background-color:#cccccc;
+}
+
+.main .mainBox .todoLists::-webkit-scrollbar {
+    width: 8px; /* 스크롤바의 두께 */
+  }
+  
+  /* 스크롤바의 썸브 (슬라이더 부분) 스타일 */
+  .main .mainBox .todoLists::-webkit-scrollbar-thumb {
+    background-color: #0091ea; /* 검정색 배경 */
+    border-radius: 10px; /* 둥근 모서리 */
+  }
+  
+  /* 스크롤바의 트랙 (배경) */
+  .main .mainBox .todoLists::-webkit-scrollbar-track {
+    background-color: transparent; /* 배경 투명 */
+  }
+.main .mainBox .todoLists .listsLi {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    border-radius: 8px;
+    width: 30%;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow:hidden;
+    z-index: 2;
+    height:200px;
+}
+.main .mainBox .todoLists .listsLi .content{width:280px;margin-bottom:20px;}
+.main .mainBox .todoLists .listsLi input.content{border:1px solid #0091ea;height:45px;line-height:1em;font-size:20px;text-indent:10px;}
+.main .dateWrap{display:flex;flex-direction:row;gap:0 20px;}
+.main .buttonWrap{display:flex;flex-direction:row;gap:0 10px;margin-top:20px;}
+.main .date{padding:5px;border-radius:5px;background-color:antiquewhite;}
+.main .cate{padding:5px;border-radius:5px;background-color:#0091ea}
+.main .modi,.main .del{padding:5px;border-radius:5px;background-color:bisque;cursor: pointer;}
+.main .modalBtn{width:100%;padding:20px;display:flex;justify-content:flex-end;}
+.main .modalBtn .addButton{width:150px;height:60px;background-color:#0091ea;border-radius:8px;font-size:20px;color:#fff;text-align:center;}
