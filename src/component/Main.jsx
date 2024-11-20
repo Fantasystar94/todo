@@ -23,23 +23,69 @@ const Main = () => {
     setEditContent(content); 
   }
 
-  const modiCompl = (id)=>{
+  const modiCompl = async (id)=>{
     if(category==='전체'){
       alert('카테고리를 선택해주세요')
       return
     }
-    dispatch({type: "MODI_TODO",
-      payload:{
-        id:id,
-        content:editContent,
-        category:category
+
+    const updatedTodo = {
+      id: id,
+      content: editContent,
+      category: category,
+    };
+  
+    try {
+      // 서버에 PUT 요청 보내기
+      const response = await fetch(`http://localhost:5000/api/todos/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedTodo),
+      });
+  
+      if (response.ok) {
+        const modifiedTodo = await response.json();
+  
+        // 리듀서에 수정된 todo 전달
+        dispatch({ type: "MODI_TODO", payload: modifiedTodo });
+  
+        // 수정 완료 후 상태 초기화
+        setEditId(null);
+        setEditContent("");
+      } else {
+        alert("할 일 수정에 실패했습니다.");
       }
-    })
+    } catch (error) {
+      console.error("Error modifying todo:", error);
+      alert("서버와의 연결에 문제가 있습니다.");
+    }
     setEditId(null)
   }
 
-  const todoDel = (id)=>{
-    window.confirm('삭제하시겠습니까?') && dispatch({ type: "DELETE_TODO", payload: id });
+  const todoDel = async (id)=>{
+    const confirmDelete = window.confirm("삭제하시겠습니까?");
+    if (confirmDelete) {
+      try {
+        // 서버에 DELETE 요청 보내기
+        const response = await fetch(`http://localhost:5000/api/todos/${id}`, {
+          method: "DELETE",
+        });
+  
+        if (response.ok) {
+          // 서버에서 삭제 성공 시, 리듀서에 DELETE_TODO 액션 보내기
+          dispatch({ type: "DELETE_TODO", payload: id });
+        } else {
+          alert("할 일 삭제에 실패했습니다.");
+        }
+      } catch (error) {
+        console.error("Error deleting todo:", error);
+        alert("서버와의 연결에 문제가 있습니다.");
+      }
+    }
+  
+    
   }
   useEffect(() => {
     const filterTodoList = [...state.todos].sort((a,b)=>b.id-a.id);

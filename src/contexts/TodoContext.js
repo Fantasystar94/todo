@@ -2,14 +2,7 @@ import React, { createContext, useReducer, useContext, useEffect, useState } fro
 
 // 초기 상태
 const initialState = {
-  todos: [
-    { id: 1, content: "이닦기", date: "2024-11-15", category: "위생" },
-    { id: 2, content: "운동하기", date: "2024-11-16", category: "운동" },
-    { id: 3, content: "책 읽기", date: "2024-11-17", category: "자기개발" },
-    { id: 4, content: "책찢기", date: "2024-11-17", category: "자기개발" },
-    { id: 5, content: "집가기", date: "2024-11-17", category: "기타" },
-    { id: 6, content: "계란사기", date: "2024-11-18", category: "구매목록" },
-  ],
+  todos: [], // 초기 Todo는 빈 배열로 설정
 };
 
 const defaultCategory = "전체";
@@ -28,6 +21,8 @@ const todoReducer = (state, action) => {
       };
     case "DELETE_TODO":
       return { ...state, todos: state.todos.filter((todo) => todo.id !== action.payload) };
+    case "SET_TODOS":
+      return { ...state, todos: action.payload }; // API에서 가져온 Todos로 업데이트
     default:
       return state;
   }
@@ -38,10 +33,23 @@ const TodoContext = createContext();
 
 // TodoProvider 컴포넌트
 export const TodoProvider = ({ children }) => {
-  const savedTodos = JSON.parse(localStorage.getItem("todolist")) || initialState.todos;
-
-  const [state, dispatch] = useReducer(todoReducer, { todos: savedTodos });
+  const [state, dispatch] = useReducer(todoReducer, initialState);
   const [selectedCategory, setSelectedCategory] = useState(defaultCategory);
+
+  // API에서 Todo 목록 가져오기
+  useEffect(() => {
+    const fetchTodos = async () => {
+      try {
+        const response = await fetch("/api/todos");
+        const data = await response.json();
+        dispatch({ type: "SET_TODOS", payload: data });
+      } catch (error) {
+        console.error("Error fetching todos:", error);
+      }
+    };
+
+    fetchTodos();
+  }, []); // 컴포넌트가 마운트 될 때 한 번만 실행
 
   // todos 상태가 변경될 때 로컬스토리지에 저장
   useEffect(() => {

@@ -11,7 +11,7 @@ const Modal = ({ closeModal }) => {
   useEffect(()=>{
 
   },[todo]);
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
 
     if(category==='전체'){
@@ -20,13 +20,34 @@ const Modal = ({ closeModal }) => {
     }
 
     const newTodo = {
-      id:JSON.parse(localStorage.getItem('todolist')).length+1,
       content: todo,
       date: today,
       category: category,
     };
 
-    dispatch({ type: "ADD_TODO", payload: newTodo });
+    try {
+      // 서버에 POST 요청 보내기
+      const response = await fetch("http://localhost:5000/api/todos", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newTodo),
+      });
+
+      if (response.ok) {
+        const addedTodo = await response.json();
+        // 새롭게 추가된 Todo를 리듀서로 전달
+        dispatch({ type: "ADD_TODO", payload: addedTodo });
+        closeModal();
+      } else {
+        alert("할 일을 추가하는데 실패했습니다.");
+      }
+    } catch (error) {
+      console.error("Error adding todo:", error);
+      alert("서버와의 연결에 문제가 있습니다.");
+    }
+
 
     closeModal();
   };

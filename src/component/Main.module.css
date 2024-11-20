@@ -59,3 +59,68 @@
 .main .modi,.main .del{padding:5px;border-radius:5px;background-color:bisque;cursor: pointer;}
 .main .modalBtn{width:100%;padding:20px;display:flex;justify-content:flex-end;}
 .main .modalBtn .addButton{width:150px;height:60px;background-color:#0091ea;border-radius:8px;font-size:20px;color:#fff;text-align:center;}
+
+@media (max-width: 749px) {
+  .main {max-width:750px;width:auto;padding:0 10px;}
+  .main .mainBox .todoLists {
+    padding: 10px;
+    display: flex;
+    gap: 20px;
+    height: auto;
+    overflow: visible;
+  }
+
+  .main .mainBox .todoLists .listsLi {
+    width: 40%;
+    height: auto;
+    padding: 10px;
+    box-shadow: none;
+    margin-bottom: 10px;
+  }
+
+  .main .mainBox .todoLists .listsLi .content {
+    width: 100%;
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  .main .mainBox .todoLists .listsLi input.content {
+    width: 100%;
+    font-size: 16px;
+    height: 40px;
+    text-indent: 10px;
+  }
+
+  .main .dateWrap {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .main .buttonWrap {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .main .date,
+  .main .cate {
+    font-size: 14px;
+    padding: 5px;
+    text-align: center;
+  }
+
+  .main .modi,
+  .main .del {
+    padding: 10px;
+    font-size: 14px;
+    width: 100%;
+  }
+
+  .main .modalBtn .addButton {
+    width: 100%;
+    height: 50px;
+    font-size: 18px;
+  }
+}
